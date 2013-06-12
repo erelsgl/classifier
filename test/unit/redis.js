@@ -30,7 +30,7 @@ describe('Redis', function() {
     backend : { type: 'Redis' }
   });
 
-  it('classify basic text', function(done) {
+  it('should classify basic text', function(done) {
     bayes.trainAll(data, function() {
       async.series([
         function(done) {
@@ -72,7 +72,7 @@ describe('Redis', function() {
 describe('Redis JSON', function() {
   var expected = {"cats":{"spam":3,"notspam":2},"words":{"vicodin":{"spam":1},"pharmacy":{"spam":1},"on":{"spam":1,"notspam":1},"cheap":{"spam":1},"replica":{"spam":1},"watches":{"spam":1},"viagra":{"spam":1},"pills":{"spam":1},"unknown":{"notspam":1},"command":{"notspam":1},"line":{"notspam":1},"parameters":{"notspam":1},"I":{"notspam":1},"don":{"notspam":1},"t":{"notspam":1},"know":{"notspam":1},"if":{"notspam":1},"this":{"notspam":1},"works":{"notspam":1},"Windows":{"notspam":1}}};
 
-  it('toJSON()', function(done) {
+  it('should write toJSON()', function(done) {
     var bayes = new classifier.Bayesian({
       backend : { type: 'Redis' }
     })
@@ -91,7 +91,7 @@ describe('Redis JSON', function() {
     });
   });
 
-  it('fromJSON()', function(done) {
+  it('should read fromJSON()', function(done) {
     var bayes = new classifier.Bayesian({
       backend : { type: 'Redis' }
     });
