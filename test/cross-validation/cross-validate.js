@@ -1,5 +1,12 @@
 var _ = require("underscore")._;
 
+/**
+ * Test the given classifier on the given train-set and test-set.
+ * @param classifierConst identifies the type of classifier to test.
+ * @param options set of options for initializing that classifier.
+ * @param trainSet, testSet arrays with objects of the format: {input: "sample1", output: "class1"}
+ * @return an object with the results of the test (- number of classification errors, and elapsed time).
+ */
 function testPartition(classifierConst, options, trainSet, testSet) {
   var classifier = new classifierConst(options);
 
@@ -20,10 +27,20 @@ function testPartition(classifierConst, options, trainSet, testSet) {
   };
 }
 
+/**
+ * Test the given classifier on the given dataset.
+ * @param classifierConst identifies the type of classifier to test.
+ * @param options set of options for initializing that classifier.
+ * @param data the gold-standard: an array with objects of the format: {input: "sample1", output: "class1"}
+ * @param k number of folds for cross-validation.
+ * 
+ * @return an object with the results of the test (- number of classification errors, and elapsed time).
+ */
 module.exports = function crossValidate(classifierConst, options, data, k) {
   k = k || 3;
   var size = data.length / k;
 
+  // Shuffle the gold-standard dataset:
   data = _(data).sortBy(function(num){
     return Math.random();
   });
